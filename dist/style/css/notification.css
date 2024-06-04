@@ -259,12 +259,16 @@
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
+  overflow: hidden;
 }
 .prompt .prompt-footer .prompt-buttons button {
-  min-width: 8em;
   font-size: 0.85rem;
   padding: 0.4em 0.5em;
   cursor: pointer;
+  background-color: #f1f1f1;
+}
+.prompt .prompt-footer .prompt-buttons button:hover {
+  background-color: #d4dadd;
 }
 .prompt .prompt-footer .prompt-buttons button:not(:last-of-type) {
   margin: 0 0.2em;

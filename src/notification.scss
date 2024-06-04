@@ -222,12 +222,17 @@
             display: flex;
             justify-content: flex-end;
             align-items: flex-end;
+            overflow: hidden;
             
             button {
-                min-width: 8em;
                 font-size: .85rem;
                 padding: .4em .5em;
                 cursor: pointer;
+                background-color: #f1f1f1;
+                
+                &:hover {
+                    background-color: #d4dadd;
+                }
 
                 &:not(:last-of-type) {
                     margin: 0 .2em;

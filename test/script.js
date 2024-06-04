@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             header: 'User Input',
             placeHolder: 'Please enter your username',
             type: 'text',
+            button: ['Okay','hello'],
             autoClose: false,
             position: 'top-center'
         });
