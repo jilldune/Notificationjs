@@ -3,9 +3,13 @@
         module.exports = factory();
     } else if (typeof define === 'function' && define.amd) {
         define(factory);
+    } else if (typeof define === 'function' && define.cmd) { // CommonJS CMD
+        define(function(require, exports, module){
+          module.exports = factory();
+        });
     } else {
         global = global || self;
-        global.Notificationjs = factory();
+        global.Notificationsjs = factory();
     }
 }(this, function () {
     'use strict';

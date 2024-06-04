@@ -1,0 +1,15 @@
+{
+    "files.autoSave": "off",
+    "liveSassCompile.settings.formats": [ 
+        {
+            "format": "expanded",
+            "extensionName": ".css", 
+            "savePath": "/dist/style/css"
+        },
+        {
+            "extensionName": ".min.css",
+            "format": "compressed",
+            "savePath": "/dist/style/minified"
+        }
+    ]
+}
