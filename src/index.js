@@ -5,6 +5,3 @@ export {
     Notification,
     Prompt
 };
-
-// new Notification(),
-// new Prompt();
