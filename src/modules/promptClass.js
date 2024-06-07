@@ -188,6 +188,7 @@ export default class Prompt {
         this.clearPosition();
         this.promptContainer.classList.remove('show');
         this.promptContainer.innerHTML = '';
+        this.isRunning = false;
     }
 
     closePrompt() {
@@ -201,6 +202,7 @@ export default class Prompt {
             if (onCloseFn) onCloseFn();
             this.showFinal(finalFn);
             this.resetPrompt();
+            this.run();
         });
     }
 
