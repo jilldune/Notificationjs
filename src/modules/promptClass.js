@@ -1,6 +1,6 @@
-import { Queue, merge } from "./helpers";
+import { Queue, merge } from "./helpers.js";
 
-export class Prompt {
+export default class Prompt {
     defaults = {
         header: 'Prompt', 
         placeHolder: 'enter text', 
@@ -69,7 +69,7 @@ export class Prompt {
     }
 
     run() {
-        if (this.queue.peek() && !this.isRunning) {
+        if (!this.queue.isEmpty() && !this.isRunning) {
             this.display(this.queue.dequeue());
             this.isRunning = true;
         }
