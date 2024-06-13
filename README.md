@@ -145,7 +145,7 @@ The prompt and notification methods parameter share some similar object data. So
 ### Exclusive for Prompt
 ## Position
 The table below shows the various position properties that can be used to controll the position of the notification or prompt container.
-|Item||Description|
+|Item|Description|
 |:----------|:----------|
 |top-right|Top Right of page|
 |right-center|Right Center of page|
