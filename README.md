@@ -130,8 +130,26 @@ The prompt and notification methods accepts a Javascript object as parameters
     notification({}); // notification method
 ```    
 The prompt and notification methods parameter share some similar object data. Some of which includes:
-### Same Properties
-|Item|Required|Type|Description|
+### Similar Properties
+```Javascript
+let options = {
+    // ... other properties
+    header: 'Notification',
+    button: null, 
+    actions: null, 
+    onClose: null, 
+    position: 'bottom-right', 
+    autoClose: true, 
+    duration: 3500, 
+    final: null, 
+    checkbox: { 
+        set: false,
+        label: 'Default',
+        checked: false
+    }
+}
+```
+|Property|Required|Type|Description|
 |:----------|:----------:|:----------:|:----------|
 |header|false|String|Shows what is to be used as a title for the notification. If not given, a placeholder text is used|
 |button|false|Array|Adds a button to the notification or prompt. It must be an array of strings that indicate the label of the buttons to be added|
@@ -140,11 +158,62 @@ The prompt and notification methods parameter share some similar object data. So
 |autoClose|false|Boolean|Specifies whether the notification/prompt should be auto closed. It is true by default|
 |duration|false|Number|This specifies how long the notification is displayed. must be in code seconds 1000 = 1 second. 3.5s = 3500 is the default if not specified.|
 |position|false|String|Specifies the position of the container on screen. Default is "bottom-right". Others can be specified see [Position](#position) for more details|
-|final|false|Function|This is a function supplied to the notification/prompt process and called after everything is done and cleared/Can be used in interchangeably with onClose property|
+|final|false|Function|This is a function supplied to the notification/prompt process and called after everything is done and cleared/Can be used in interchangeably with onClose property|  
+
+#### Checkbox
+A checkbox can be added to the notification or the prompt container. To do so, a checkbox property can be added to the object which is also an object example
+```Javascript
+let options = {
+    // ... other properties
+    checkbox: {
+        set: true,
+        label: 'Label Name',
+        checked: false
+    }
+}
+```
+The object description is shown in the table below:  
+|Property|Required|Type|Description|
+|:----------|:----------:|:----------:|:----------|
+|set|true|Boolean|Shows whether to creat the checkbox or not. Default is True|
+|label|String|String|The label/name of the checkbox. Default is 'Defualt'.|
+|checked|true|Boolean|Shows whether the checkbox is initially checked or not. Default is False|
+
 ### Exclusive properties for Notification
+```Javascript
+let options = {
+    // ... other properties
+    body: 'This is a notification body'
+}
+```
+|Property|Required|Type|Description|
+|:----------|:----------:|:----------:|:----------|
+|body|false|String|Shows what is to be used as a body text for the notification. If not given, a placeholder text is used|
 ### Exclusive properties for Prompt
+```Javascript
+let options = {
+    // ... other properties 
+    placeHolder: 'enter text', 
+    type: 'text',
+    value: ''
+}
+```
+The prompt is actualy used to collect user input and the resulting value entered is returned.  
+The table below shows the various properties that can be included in the parameter object passed.  
+
+|Property|Required|Type|Description|
+|:----------|:----------:|:----------:|:----------|
+|type|false|String|Shows the type of element input type to used. If not given, a 'text' input type is used|
+|placeholder|true|String|Shows what is to be used as a placeholder for the input. If not given, a placeholder text is used|
+|value|false|String|Shows what is to be used as an initial for the input.|
 ### Position
 The table below shows the various position properties that can be used to controll the position of the notification or prompt container.
+```Javascript
+let options = {
+    // ... other properties
+    position: 'bottom-right'
+}
+```
 |Item|Description|
 |:----------|:----------|
 |top-right|Top Right of page|
