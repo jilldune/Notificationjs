@@ -1,4 +1,4 @@
-import { Notification, Prompt } from "../dist/Notificationjs.esm.js";
+import { Notification, Prompt } from "../dist/notificationjs/Notificationjs.esm.js";
 document.addEventListener('DOMContentLoaded', () => {
     const {notification} = new Notification();
     const {prompt} = new Prompt();
@@ -63,6 +63,4 @@ document.addEventListener('DOMContentLoaded', () => {
 //             autoClose: false,
 //         });
 //     })
-
-    
 // });
