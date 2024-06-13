@@ -130,7 +130,7 @@ The prompt and notification methods accepts a Javascript object as parameters
     notification({}); // notification method
 ```    
 The prompt and notification methods parameter share some similar object data. Some of which includes:
-### Same Object Data
+### Same Properties
 |Item|Required|Type|Description|
 |:----------|:----------:|:----------:|:----------|
 |header|false|String|Shows what is to be used as a title for the notification. If not given, a placeholder text is used|
@@ -141,9 +141,9 @@ The prompt and notification methods parameter share some similar object data. So
 |duration|false|Number|This specifies how long the notification is displayed. must be in code seconds 1000 = 1 second. 3.5s = 3500 is the default if not specified.|
 |position|false|String|Specifies the position of the container on screen. Default is "bottom-right". Others can be specified see [Position](#position) for more details|
 |final|false|Function|This is a function supplied to the notification/prompt process and called after everything is done and cleared/Can be used in interchangeably with onClose property|
-### Exclusive for Notification
-### Exclusive for Prompt
-## Position
+### Exclusive properties for Notification
+### Exclusive properties for Prompt
+### Position
 The table below shows the various position properties that can be used to controll the position of the notification or prompt container.
 |Item|Description|
 |:----------|:----------|
