@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 // code transpile rules
 export default merge(common, {
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'dist/notificationjs'),
         filename: 'Notificationjs.esm.js',
         library: {
             type: 'module'

@@ -4,12 +4,12 @@
         {
             "format": "expanded",
             "extensionName": ".css", 
-            "savePath": "/dist/style/css"
+            "savePath": "/dist/notificationjs/style/css"
         },
         {
             "extensionName": ".min.css",
             "format": "compressed",
-            "savePath": "/dist/style/minified"
+            "savePath": "/dist/notificationjs/style/minified"
         }
     ]
 }
