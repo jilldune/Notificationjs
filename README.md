@@ -45,7 +45,7 @@ See [page](https://remixicon.com/) or [github page](https://github.com/Remix-Des
 ```  
   
   
-### For ES Modules
+### ES Modules
 ```Javascript
 import { Notification, Prompt } from "path/to/folder/notificationjs/Notificationjs.esm.js";
 document.addEventListener('DOMContentLoaded', () => {
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })  
 });
 ```
-### For UMD Modules
+### UMD Modules
 Import file in the global space i.e in your html file and it'll be available globally in the 'Notificationjs' variable
 ```Javascript
 document.addEventListener('DOMContentLoaded', () => {
