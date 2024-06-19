@@ -15,7 +15,7 @@ export default class Prompt {
         final: null, 
         checkbox: { 
             set: false,
-            label: 'Default',
+            label: 'Label',
             checked: false
         }
     };
@@ -144,21 +144,46 @@ export default class Prompt {
     }
 
     bindButtonEvent() {
-        const { button, final, actions } = this.settings;
+        const { button, final, actions, checkbox } = this.settings;
         const buttons = Array.isArray(button) ? button : [];
         const callbacks = Array.isArray(actions) ? actions : [];
         const finalFn = typeof final === 'function' ? final : null;
 
         if (buttons.length) {
             const btnElements = [...this.promptContainer.querySelectorAll('.prompt-footer button')];
+            let input = this.promptContainer.querySelector('.prompt-input');
+            let checkInput = null;
+            
             btnElements.forEach((btn, i) => {
                 btn.addEventListener('click', (evt) => {
                     evt.preventDefault();
-                    if (callbacks[i]) callbacks[i]();
+                    if (callbacks[i]) {
+
+                        // Check if checkbox is set
+                        if (checkbox.set) {
+                            checkInput = this.promptContainer.querySelector('.prompt-checker label input');
+                        }
+
+                        // create an object to be passed to the
+                        // callback function
+                        const callObj = {
+                            input,
+                            value: input.value.trim() || null,
+                            checked:  checkInput ? checkInput.checked : false
+                        };
+
+                        // calling the callback function
+                        callbacks[i](callObj);
+                    }
+
+                    // displaying the final function if set
                     this.showFinal(finalFn);
+
+                    // resetting the whole process
                     setTimeout(() => {
                         this.resetPrompt();
                         this.isRunning = false;
+                        checkInput = false;
                         this.run();
                     }, 200);
                 }, { once: true });

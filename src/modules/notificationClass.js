@@ -141,21 +141,45 @@ export default class Notification {
     }
 
     bindButtonEvent() {
-        const { button, final, actions } = this.settings;
+        const { button, final, actions, checkbox } = this.settings;
         const buttons = Array.isArray(button) ? button : [];
         const callbacks = Array.isArray(actions) ? actions : [];
         const finalFn = typeof final === 'function' ? final : null;
+        let checkInput = null;
 
         if (buttons.length) {
             const btnElements = [...this.notificationContainer.querySelectorAll('.notification-footer button')];
             btnElements.forEach((btn, i) => {
                 btn.addEventListener('click', (evt) => {
                     evt.preventDefault();
-                    if (callbacks[i]) callbacks[i]();
+                    if (callbacks[i]) {
+                        // Check if checkbox is set
+                        if (checkbox.set) {
+                            checkInput = this.notificationContainer.querySelector('.notification-checker label input');
+                            
+                            // create an object to be passed to the
+                            // callback function
+                            const callObj = {
+                                checked:  checkInput ? checkInput.checked : false
+                            };
+    
+                            // calling the callback function
+                            callbacks[i](callObj);
+                        } else {
+                            // calling the callback function
+                            callbacks[i]();
+                        }
+
+                    }
+
+                    // displaying the final function if set
                     this.showFinal(finalFn);
+
+                    // resetting the whole process
                     setTimeout(() => {
                         this.resetNotification();
                         this.run();
+                        checkInput = false;
                     }, 200);
                 }, { once: true });
             });

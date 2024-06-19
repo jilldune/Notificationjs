@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
             placeHolder: 'Please enter your username',
             type: 'text',
             button: ['Okay','hello'],
+            actions: [(obj)=>{console.log(obj);},()=>{}],
+            checkbox: {
+                set: false,
+                label: 'Check box',
+                checked: true
+            },
             autoClose: false,
             position: 'top-center'
         });
@@ -26,6 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
             position: 'top-center',
             autoClose: false,
             button: ['Okay','hello'],
+            actions: [(obj)=>{console.log(obj);},()=>{}],
+            checkbox: {
+                set: false,
+                label: 'Check box notification',
+                checked: true
+            },
         });
     })
 
