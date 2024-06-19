@@ -151,14 +151,14 @@ let options = {
 ```
 |Property|Required|Type|Description|
 |:----------|:----------:|:----------:|:----------|
-|header|false|String|Shows what is to be used as a title for the notification. If not given, a placeholder text is used|
-|button|false|Array|Adds a button to the notification or prompt. It must be an array of strings that indicate the label of the buttons to be added|
-|actions|false|Array|Adds Event listener to the buttons included. It must be an array of functions that is mapped to the number of button labels spcified in the buttons property included|
-|onClose|false|Function|When added, is run immediately the notifiation is closed|
-|autoClose|false|Boolean|Specifies whether the notification/prompt should be auto closed. It is true by default|
-|duration|false|Number|This specifies how long the notification is displayed. must be in code seconds 1000 = 1 second. 3.5s = 3500 is the default if not specified.|
-|position|false|String|Specifies the position of the container on screen. Default is "bottom-right". Others can be specified see [Position](#position) for more details|
-|final|false|Function|This is a function supplied to the notification/prompt process and called after everything is done and cleared/Can be used in interchangeably with onClose property|  
+|header|no|String|Shows what is to be used as a title for the notification. If not given, a placeholder text is used|
+|button|no|Array|Adds a button to the notification or prompt. It must be an array of strings that indicate the label of the buttons to be added|
+|actions|no|Array|Adds Event listener to the buttons included. It must be an array of functions that is mapped to the number of button labels spcified in the buttons property included|
+|onClose|no|Function|When added, is run immediately the notifiation is closed|
+|autoClose|no|Boolean|Specifies whether the notification/prompt should be auto closed. It is true by default|
+|duration|no|Number|This specifies how long the notification is displayed. must be in code seconds 1000 = 1 second. 3.5s = 3500 is the default if not specified.|
+|position|no|String|Specifies the position of the container on screen. Default is "bottom-right". Others can be specified see [Position](#position) for more details|
+|final|no|Function|This is a function supplied to the notification/prompt process and called after everything is done and cleared/Can be used in interchangeably with onClose property|  
 
 #### Checkbox
 A checkbox can be added to the notification or the prompt container. To do so, a checkbox property can be added to the object which is also an object example
@@ -175,9 +175,9 @@ let options = {
 The object description is shown in the table below:  
 |Property|Required|Type|Description|
 |:----------|:----------:|:----------:|:----------|
-|set|true|Boolean|Shows whether to creat the checkbox or not. Default is True|
-|label|String|String|The label/name of the checkbox. Default is 'Defualt'.|
-|checked|true|Boolean|Shows whether the checkbox is initially checked or not. Default is False|
+|set|yes|Boolean|Shows whether to creat the checkbox or not. Default is True|
+|label|no|String|The label/name of the checkbox. Default is 'Label'.|
+|checked|no|Boolean|Shows whether the checkbox is initially checked or not. Default is False|
 
 ### Exclusive properties for Notification
 ```Javascript
@@ -188,7 +188,7 @@ let options = {
 ```
 |Property|Required|Type|Description|
 |:----------|:----------:|:----------:|:----------|
-|body|false|String|Shows what is to be used as a body text for the notification. If not given, a placeholder text is used|
+|body|no|String|Shows what is to be used as a body text for the notification. If not given, a placeholder text is used|
 ### Exclusive properties for Prompt
 ```Javascript
 let options = {
@@ -203,9 +203,9 @@ The table below shows the various properties that can be included in the paramet
 
 |Property|Required|Type|Description|
 |:----------|:----------:|:----------:|:----------|
-|type|false|String|Shows the type of element input type to used. If not given, a 'text' input type is used|
-|placeholder|true|String|Shows what is to be used as a placeholder for the input. If not given, a placeholder text is used|
-|value|false|String|Shows what is to be used as an initial for the input.|
+|type|no|String|Shows the type of element input type to used. If not given, a 'text' input type is used|
+|placeholder|no|String|Shows what is to be used as a placeholder for the input. If not given, a placeholder text is used|
+|value|no|String|Shows what is to be used as an initial for the input.|
 ### Position
 The table below shows the various position properties that can be used to controll the position of the notification or prompt container.
 ```Javascript
