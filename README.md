@@ -168,16 +168,18 @@ let options = {
     checkbox: {
         set: true,
         label: 'Label Name',
-        checked: false
+        checked: false,
+        onChange: null
     }
 }
 ```
-The object description is shown in the table below:  
+More about the checkbox object is shown in the table below:  
 |Property|Required|Type|Description|
 |:----------|:----------:|:----------:|:----------|
 |set|yes|Boolean|Shows whether to creat the checkbox or not. Default is True|
 |label|no|String|The label/name of the checkbox. Default is 'Label'.|
 |checked|no|Boolean|Shows whether the checkbox is initially checked or not. Default is False|
+|onChange|no|Function|If this function is set, it is fired any time the state of the checkbox changes and the state is passed to the it as an argument that can be received and used.|
 
 ### Exclusive properties for Notification
 ```Javascript
