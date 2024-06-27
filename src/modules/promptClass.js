@@ -16,7 +16,8 @@ export default class Prompt {
         checkbox: { 
             set: false,
             label: 'Label',
-            checked: false
+            checked: false,
+            onChange: null
         }
     };
 
@@ -128,6 +129,21 @@ export default class Prompt {
         return '';
     }
 
+    bindCheckboxEvent() {
+        const { checkbox } = this.settings;
+        if (checkbox && this.isObject(checkbox)) {
+            const { onChange, set } = checkbox;
+            if (set) {
+                if (onChange && typeof onChange === "function") {
+                    this.promptContainer.querySelector('.prompt-checker label input[type="checkbox"]')
+                    .addEventListener('change',(event)=>{
+                        onChange(event.target.checked);
+                    });
+                }
+            }
+        }
+    }
+
     setButtons() {
         const { button } = this.settings;
         if (Array.isArray(button) && button.length) {
@@ -150,6 +166,10 @@ export default class Prompt {
         const callbacks = Array.isArray(actions) ? actions : [];
         const finalFn = typeof final === 'function' ? final : null;
 
+        // bind checkbox event if set
+        this.bindCheckboxEvent();
+
+        // create and buttons and add listeners
         if (buttons.length) {
             const btnElements = [...this.promptContainer.querySelectorAll('.prompt-footer button')];
             let input = this.promptContainer.querySelector('.prompt-input');

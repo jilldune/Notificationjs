@@ -14,7 +14,8 @@ export default class Notification {
         checkbox: { 
             set: false,
             label: 'Default',
-            checked: false
+            checked: false,
+            onChange: null
         }
     };
 
@@ -122,6 +123,22 @@ export default class Notification {
             }
         }
         return '';
+    }    
+
+    bindCheckboxEvent() {
+        const { checkbox } = this.settings;
+        if (checkbox && this.isObject(checkbox)) {
+            const { onChange, set } = checkbox;
+            if (set) {
+                if (onChange && typeof onChange === "function") {
+                    this.notificationContainer.querySelector('.notification-checker label input[type="checkbox"]')
+                    .addEventListener('change',(event)=>{
+                        onChange(event.target.checked);
+                    });
+                }
+            }
+        }
+        return '';
     }
 
     setButtons() {
@@ -146,7 +163,11 @@ export default class Notification {
         const callbacks = Array.isArray(actions) ? actions : [];
         const finalFn = typeof final === 'function' ? final : null;
         let checkInput = null;
+        
+        // bind checkbox event if set
+        this.bindCheckboxEvent();
 
+        // create and buttons and add listeners
         if (buttons.length) {
             const btnElements = [...this.notificationContainer.querySelectorAll('.notification-footer button')];
             btnElements.forEach((btn, i) => {
