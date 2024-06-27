@@ -77,26 +77,27 @@ export default class Prompt {
 
     display(options) {
         this.settings = this.isObject(options) ? merge(this.defaults, options) : this.settings;
-        let { header, position, value, placeHolder } = this.settings;
+        let { header, position, value, placeHolder, type } = this.settings;
         header = header || this.defaults.header;
         position = position || this.defaults.position;
         value = value || this.defaults.value;
+        type = type || this.defaults.type;
         placeHolder = placeHolder || this.defaults.placeHolder;
 
         this.checkPosition(position);
         this.resetPrompt();
-        this.setContent(header, position, value, placeHolder);
+        this.setContent(header, position, type, value, placeHolder);
         this.closePrompt();
     }
 
-    setContent(header, position, value, placeHolder) {
+    setContent(header, position, type, value, placeHolder) {
         this.promptContainer.innerHTML = `
             <div class="prompt-header">
                 <p>${header}</p>
                 <span class="prompt-close"><i class="${this.closeIcon(position)}"></i></span>
             </div>
             <div class="prompt-body">
-                <input class="prompt-input" type="text" ${value? `value="${value}"`:""} placeholder="${placeHolder}" />
+                <input class="prompt-input" type="${type}" ${value? `value="${value}"`:""} placeholder="${placeHolder}" />
             </div>
             <div class="prompt-footer">
                 ${this.createCheckBox()}
