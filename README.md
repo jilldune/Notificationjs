@@ -16,7 +16,23 @@ For requires, global scope and AMD systems, the 'Notification.umd.js' file can b
 ## Installation
 Copy/Download the dist folder into your project and that's all.  
 Please note, the component's icon depends on remixicons so please do well to link remixicon.css into your projects html.  
-See [page](https://remixicon.com/) or [github page](https://github.com/Remix-Design/RemixIcon) for updated icons or you can add a link from the 'dist/notificationjs/remixicon/remixicon.css' in your project.
+See remixicons [page](https://remixicon.com/) or [github page](https://github.com/Remix-Design/RemixIcon) for updated icons. You can add a link from the 'dist/notificationjs/remixicon/remixicon.css' in your project htmL header tag.  
+Make sure to link the styles of the component into the header tag for the component relies on that for it's styling and functioning. There are two files compiled, minified version 'notification.min.css' for production and regular style 'notification.css' for development all stored in a seperate folder - 'css' and 'minified' in the style folder .
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificationjs</title>
+    <!-- Link to remixicons -->
+    <link rel="stylesheet" href="../dist/notificationjs/remixicon/remixicon.css"> <!--OR LINK TO CDN -->
+    <!-- Link to the component's css -->
+    <link rel="stylesheet" href="../dist/notificationjs/style/minified/notification.min.css">
+</head>
+<body>
+</body>
+```
 
 ## Usage
 ```html
@@ -123,7 +139,7 @@ The notification and prompt methods are available in the Notification and Prompt
     // Prompt
     const {prompt} = new Prompt(); // Extracting the prompt method - inline (Class Object Destructuring)
 ```  
-The prompt and notification methods accepts a Javascript object as parameters
+The prompt and notification methods accepts a Javascript object as parameters or arguments
 ```Javascript
     prompt({}); // prompt method
 
@@ -176,10 +192,10 @@ let options = {
 More about the checkbox object is shown in the table below:  
 |Property|Required|Type|Description|
 |:----------|:----------:|:----------:|:----------|
-|set|yes|Boolean|Shows whether to creat the checkbox or not. Default is True|
+|set|yes|Boolean|Tells the process to create the checkbox or not. Default is False|
 |label|no|String|The label/name of the checkbox. Default is 'Label'.|
 |checked|no|Boolean|Shows whether the checkbox is initially checked or not. Default is False|
-|onChange|no|Function|If this function is set, it is fired any time the state of the checkbox changes and the state is passed to the it as an argument that can be received and used.|
+|onChange|no|Function|If this function is set, it is fired any time the state of the checkbox changes and the state is passed to it as an argument that can be received and used.|
 
 ### Exclusive properties for Notification
 ```Javascript
