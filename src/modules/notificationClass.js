@@ -13,7 +13,7 @@ export default class Notification {
         final: null, 
         checkbox: { 
             set: false,
-            label: 'Default',
+            label: 'Label',
             checked: false,
             onChange: null
         }
@@ -163,7 +163,7 @@ export default class Notification {
         const callbacks = Array.isArray(actions) ? actions : [];
         const finalFn = typeof final === 'function' ? final : null;
         let checkInput = null;
-        
+
         // bind checkbox event if set
         this.bindCheckboxEvent();
 
