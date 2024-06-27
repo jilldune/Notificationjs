@@ -7,14 +7,33 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         // Display the prompt
         prompt({
-            header: 'User Input',
+            header: 'Text',
             placeHolder: 'Please enter your username',
             type: 'text',
             button: ['Okay','hello'],
             actions: [(obj)=>{console.log(obj);},()=>{}],
             checkbox: {
-                set: false,
+                set: true,
                 label: 'Check box',
+                checked: true,
+                onChange: (status) => console.log(status)
+            },
+            autoClose: false,
+            position: 'top-center'
+        });
+    })
+    document.getElementById('prompt-pass').addEventListener('click', (e)=>{
+        e.preventDefault();
+        // Display the prompt
+        prompt({
+            header: 'Password',
+            placeHolder: 'Please enter your username',
+            type: 'password',
+            button: ['Okay','hello'],
+            actions: [(obj)=>{console.log(obj);},()=>{}],
+            checkbox: {
+                set: false,
+                label: 'Create strong password',
                 checked: true
             },
             autoClose: false,
@@ -34,9 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
             button: ['Okay','hello'],
             actions: [(obj)=>{console.log(obj);},()=>{}],
             checkbox: {
-                set: false,
+                set: true,
                 label: 'Check box notification',
-                checked: true
+                checked: true,
+                onChange: (state) => console.log(state)
             },
         });
     })
