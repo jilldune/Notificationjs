@@ -224,7 +224,7 @@ let options = {
 |:----------|:----------:|:----------:|:----------|
 |toast_type|yes|String|Tells the process what toast to be used. see [ToastTypes](#toast-types) for more|
 |message|yes|String|The message snippet to display|
-|immediate|no|Boolean|Sets its priority to high and displays it immediately, skipping all steps|  
+|immediate|no|Boolean|Sets its priority to high and displays it immediately, skipping all steps. The default is false if nothing is specified|  
 
 #### Checkbox
 A checkbox can be added to the notification or the prompt container. To do so, a checkbox property can be added to the object which is also an object example
@@ -296,6 +296,12 @@ let options = {
 
 ### Toast Types
 All Toast types are strings. The type can be used or the alternate representation can be substituted
+```Javascript
+    // toast(toast_type,message,immediate);
+    toast('error','message',true);
+    toast('e','message',false);
+    toast('e','message');
+```
 |type|Alternate|Description|
 |:----------|:----------:|:----------|
 |success|s|Success toast message|
