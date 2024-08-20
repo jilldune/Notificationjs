@@ -5,6 +5,10 @@ export class Queue {
         this.items.push(element);
     }
 
+    appendFirst(element) {
+        this.items.unshift(element);
+    }
+
     dequeue() {
         if (this.isEmpty()) return 'Underflow';
         return this.items.shift();
