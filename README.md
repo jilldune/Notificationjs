@@ -224,12 +224,7 @@ let options = {
 |:----------|:----------:|:----------:|:----------|
 |toast_type|yes|String|Tells the process what toast to be used. see [ToastTypes](#toast-types) for more|
 |message|yes|String|The message snippet to display|
-|immediate|no|Boolean|Sets its priority to high and displays it immediately, skipping all steps|
-|onClose|no|Function|When added, is run immediately the notifiation is closed|
-|autoClose|no|Boolean|Specifies whether the notification/prompt should be auto closed. It is true by default|
-|duration|no|Number|This specifies how long the notification is displayed. must be in code seconds 1000 = 1 second. 3.5s = 3500 is the default if not specified.|
-|position|no|String|Specifies the position of the container on screen. Default is "bottom-right". Others can be specified see [Position](#position) for more details|
-|final|no|Function|This is a function supplied to the notification/prompt process and called after everything is done and cleared/Can be used in interchangeably with onClose property|  
+|immediate|no|Boolean|Sets its priority to high and displays it immediately, skipping all steps|  
 
 #### Checkbox
 A checkbox can be added to the notification or the prompt container. To do so, a checkbox property can be added to the object which is also an object example
@@ -302,7 +297,7 @@ let options = {
 ### Toast Types
 All Toast types are strings. The type can be used or the alternate representation can be substituted
 |type|Alternate|Description|
-|:----------|:----------|
+|:----------|:----------:|:----------|
 |success|s|Success toast message|
 |error|e|Error toast message|
 |info|i|Information toast message|
