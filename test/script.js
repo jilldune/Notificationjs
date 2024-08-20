@@ -1,7 +1,8 @@
-import { Notification, Prompt } from "../dist/notificationjs/Notificationjs.esm.js";
+import { Notification, Prompt, Toast } from "../dist/notificationjs/Notificationjs.esm.js";
 document.addEventListener('DOMContentLoaded', () => {
     const {notification} = new Notification();
     const {prompt} = new Prompt();
+    const {toast} = new Toast();
 
     document.getElementById('prompt').addEventListener('click', (e)=>{
         e.preventDefault();
@@ -22,25 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             position: 'top-center'
         });
     })
-    document.getElementById('prompt-pass').addEventListener('click', (e)=>{
-        e.preventDefault();
-        // Display the prompt
-        prompt({
-            header: 'Password',
-            placeHolder: 'Please enter your username',
-            type: 'password',
-            button: ['Okay','hello'],
-            actions: [(obj)=>{console.log(obj);},()=>{}],
-            checkbox: {
-                set: false,
-                label: 'Create strong password',
-                checked: true
-            },
-            autoClose: false,
-            position: 'top-center'
-        });
-    })
-    
+
     document.getElementById('notif')
     .addEventListener('click', (e)=>{
         e.preventDefault();
@@ -60,8 +43,21 @@ document.addEventListener('DOMContentLoaded', () => {
             },
         });
     })
-
     
+    document.getElementById('toast').addEventListener('click', (e)=>{
+        e.preventDefault();
+        // Display the prompt
+        toast('a','Hello, sup... Alert');
+        toast('n','Hello, sup... Neutral');
+        toast('s','Hello, sup... Success');
+        toast('i','Hello, sup... Info');
+        toast('e','Hello, sup... Error');
+    })
+    document.getElementById('toastIm').addEventListener('click', (e)=>{
+        e.preventDefault();
+        // Display the prompt
+        toast('n','Hey, Hey, Hey, this is an immediate toast',true);
+    })
 });
 
 // ======== Global Scope Test ===========

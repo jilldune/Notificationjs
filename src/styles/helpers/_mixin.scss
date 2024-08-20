@@ -1,0 +1,38 @@
+@mixin horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+@mixin vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+@mixin center {
+    display: grid;
+    place-items: center;
+}
+@mixin space-between {
+    display: flex;
+    justify-content: space-between;
+}
+@mixin grid2col {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: 
+        "left right"
+    ;
+}
+@mixin roundImg {
+    background-position: center !important;
+    object-fit: cover !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+}
+@mixin truncate{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
