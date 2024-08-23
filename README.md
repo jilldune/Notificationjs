@@ -264,12 +264,13 @@ let options = {
     }
 }
 ```
-More about the checkbox object is shown in the table below:  
+More about the backdrop object is shown in the table below:  
 |Property|Required|Type|Description|
 |:----------|:----------:|:----------:|:----------|
-|set|yes|Boolean|Tells the process to create the checkbox or not. Default is True|
-|level|no|Number|The the level shows how much background should be added, it ranges from 1 - 10. Default is transparent.|
-|clcikToClose|no|Boolean|Shows whether the backdrop can be clicked to close the whole function, it doesn't execute any user defined code passed. Default is False|  
+|set|yes|Boolean|Tells the process to create the backdrop or not. Default is True|
+|level|no|Number|The level shows how much background should be added, it ranges from 1 - 10. Default is transparent.|
+|clickToClose|no|Boolean|Shows whether the backdrop can be clicked to close the component, it doesn't execute any user defined code passed. Default is False| 
+
 Note: This property and others can be passed to the constructor function and is set as default, but can be over written at runtime as the object is passed to the notification or prompt method.  
 ```Javascript
     let options = {
@@ -286,7 +287,7 @@ Note: This property and others can be passed to the constructor function and is 
     const {prompt} = new Prompt(options);
 
     // passed to the method to be executed at runtime
-    notifiation({
+    notification({
         // ... other properties
         backdrop: {
             set: true,
