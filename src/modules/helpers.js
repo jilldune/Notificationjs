@@ -32,6 +32,104 @@ export class Queue {
     }
 }
 
+export class BackDrop {
+    defaults = {
+        backdrop: {
+            set: false,
+            level: 1,
+            clickToClose: false
+        }
+    };
+    settings = {};
+    PREFIX = '-notifjs';
+    BACK_DROP_ID = `backdrop${this.PREFIX}`;
+    notificationBackdrop = null;
+    listenerAdded = false;
+    callback = null;
+
+    constructor(options) {
+        this.setOptions(options);
+    }
+
+    setOptions(options) {
+        this.settings = isObject(options) ? merge(this.defaults, options) : this.defaults;
+    }
+
+    createBackdrop() {
+        let dropSetting = this.settings.backdrop;
+        if (!dropSetting.set) return; // return if backdrop is not needed
+
+        let currentDrop = document.getElementById(this.BACK_DROP_ID);// get id from the DOM
+        // if id is present
+        if (currentDrop) {
+            this.removeBackdropBGLevel(currentDrop);
+            currentDrop.classList.add(`drop-${dropSetting.level}`);
+            this.notificationBackdrop = currentDrop;// save it
+            return;
+        }
+
+        const notificationBackdrop = document.createElement('div');
+        notificationBackdrop.classList.add(`drop-${dropSetting.level}`);
+        notificationBackdrop.id = this.BACK_DROP_ID;
+        const scripts = document.body.querySelectorAll('script');
+        if (scripts) {
+            document.body.insertBefore(notificationBackdrop, scripts[0]);
+        } else {
+            document.body.append(notificationBackdrop);
+        }
+        this.notificationBackdrop = notificationBackdrop;        
+    }
+
+    removeBackdropBGLevel(backdropElem) {
+        for (let i = 1; i < 11 ; i++) {
+            backdropElem.classList.remove(`drop-${i}`);
+        }
+    }
+
+    toggleBackdrop() {
+        let dropSetting = this.settings.backdrop;        
+        if (dropSetting.set) {
+            let currentDrop = document.getElementById(this.BACK_DROP_ID);
+            if (currentDrop.classList.contains('show')) {
+                currentDrop.classList.remove('show');
+                this.notificationBackdrop = currentDrop;
+                this.removeListener();
+            } else {
+                currentDrop.classList.add('show');
+                this.notificationBackdrop = currentDrop;
+            }
+        }
+    }
+
+    bindBackDropEvent(callback) {
+        if (this.listenerAdded) return;
+
+        const {backdrop} = this.settings;
+        if (backdrop.set && backdrop.clickToClose) {
+            this.callback = callback;
+            this.notificationBackdrop.addEventListener('click',this.backdropClick);
+            this.listenerAdded = true;
+        }
+    }
+
+    backdropClick = (e) => {
+        e.preventDefault();
+        setTimeout(() => {
+            if (isFunction(this.callback)) this.callback();                    
+            this.toggleBackdrop();
+            this.removeListener();
+        }, 200);
+    }
+
+    removeListener() {
+        if (this.listenerAdded)  {
+            this.notificationBackdrop.removeEventListener('click', this.backdropClick);
+            this.listenerAdded = false;
+        }
+    }
+}
+
+// Merge Object function
 export const merge = (...objects) => {
     const isObject = obj => obj && typeof obj === 'object';
     return objects.reduce((prev, obj) => {
@@ -49,3 +147,11 @@ export const merge = (...objects) => {
         return prev;
     }, {});
 };
+
+export const isObject = (obj) => {
+    return obj && typeof obj === "object" && !Array.isArray(obj);
+}
+
+export const isFunction = (fn) => {
+    return fn && typeof fn === "function";
+}

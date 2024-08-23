@@ -1,4 +1,4 @@
-import { Queue, merge } from "./helpers.js";
+import { BackDrop, Queue, merge } from "./helpers.js";
 
 export default class Prompt {
     defaults = {
@@ -18,6 +18,11 @@ export default class Prompt {
             label: 'Label',
             checked: false,
             onChange: null
+        },
+        backdrop: {
+            set: true,
+            level: 1,
+            clickToClose: false
         }
     };
 
@@ -45,10 +50,13 @@ export default class Prompt {
     promptContainer = null;
     queue = undefined;
     isRunning = false;
+    backdropClass = null;
 
     constructor(options) {
         this.queue = new Queue();
         this.settings = this.isObject(options) ? merge(this.defaults, options) : this.defaults;
+
+        this.backdropClass = new BackDrop(this.settings);
         this.createContainer();
     }
 
@@ -77,13 +85,17 @@ export default class Prompt {
     }
 
     display(options) {
-        this.settings = this.isObject(options) ? merge(this.defaults, options) : this.settings;
+        this.settings = this.isObject(options) ? merge(this.defaults, {backdrop: this.settings.backdrop}, options) : this.settings;
         let { header, position, value, placeHolder, type } = this.settings;
         header = header || this.defaults.header;
         position = position || this.defaults.position;
         value = value || this.defaults.value;
         type = type || this.defaults.type;
         placeHolder = placeHolder || this.defaults.placeHolder;
+
+        // backdrop
+        this.backdropClass.setOptions(this.settings);
+        this.backdropClass.createBackdrop();
 
         this.checkPosition(position);
         this.resetPrompt();
@@ -108,7 +120,10 @@ export default class Prompt {
         this.bindButtonEvent();
         this.checkAutoClose();
         this.promptContainer.classList.add(position);
-        setTimeout(() => this.promptContainer.classList.add('show'), 200);
+        setTimeout(() =>{
+            this.backdropClass.toggleBackdrop();
+            this.promptContainer.classList.add('show')
+        }, 200);
     }
 
     createCheckBox() {
@@ -203,6 +218,7 @@ export default class Prompt {
                     // resetting the whole process
                     setTimeout(() => {
                         this.resetPrompt();
+                        this.backdropClass.toggleBackdrop();
                         this.isRunning = false;
                         checkInput = false;
                         this.run();
@@ -210,6 +226,12 @@ export default class Prompt {
                 }, { once: true });
             });
         }
+
+        // backdrop events
+        this.backdropClass.bindBackDropEvent(()=>{
+            this.resetNotification();
+            this.run();
+        });
     }
 
     checkAutoClose() {
@@ -222,6 +244,7 @@ export default class Prompt {
         if (autoCloseEnabled) {
             setTimeout(() => {
                 this.resetPrompt();
+                this.backdropClass.toggleBackdrop();
                 if (onCloseFn) onCloseFn();
                 this.showFinal(finalFn);
                 this.isRunning = false;
@@ -248,6 +271,7 @@ export default class Prompt {
             if (onCloseFn) onCloseFn();
             this.showFinal(finalFn);
             this.resetPrompt();
+            this.backdropClass.toggleBackdrop();
             this.run();
         });
     }

@@ -1,4 +1,4 @@
-import { Queue, merge } from "./helpers.js";
+import { BackDrop, Queue, merge } from "./helpers.js";
 
 export default class Notification {
     defaults = {
@@ -16,6 +16,11 @@ export default class Notification {
             label: 'Label',
             checked: false,
             onChange: null
+        },
+        backdrop: {
+            set: true,
+            level: 1,
+            clickToClose: false
         }
     };
 
@@ -41,12 +46,16 @@ export default class Notification {
 
     settings = {};
     notificationContainer = null;
+    backdropClass = undefined;
     queue = undefined;
     isRunning = false;
 
     constructor(options) {
         this.queue = new Queue();
         this.settings = this.isObject(options) ? merge(this.defaults, options) : this.defaults;
+
+        this.backdropClass = new BackDrop(this.settings);
+
         this.createContainer();
     }
 
@@ -60,6 +69,9 @@ export default class Notification {
             document.body.append(notificationContainer);
         }
         this.notificationContainer = notificationContainer;
+
+        // create a backdrop
+        this.backdropClass.createBackdrop();
     }
 
     notification = (options) => {
@@ -75,11 +87,16 @@ export default class Notification {
     }
 
     display(options) {
-        this.settings = this.isObject(options) ? merge(this.defaults, options) : this.settings;
+        this.settings = this.isObject(options) ? merge(this.defaults, {backdrop: this.settings.backdrop}, options) : this.settings;
+        
         let { header, body, position } = this.settings;
         header = header || this.defaults.header;
         body = body || this.defaults.body;
         position = position || this.defaults.position;
+
+        // backdrop
+        this.backdropClass.setOptions(this.settings);
+        this.backdropClass.createBackdrop();
 
         this.checkPosition(position);
         this.resetNotification();
@@ -104,7 +121,10 @@ export default class Notification {
         this.bindButtonEvent();
         this.checkAutoClose();
         this.notificationContainer.classList.add(position);
-        setTimeout(() => this.notificationContainer.classList.add('show'), 200);
+        setTimeout(() => {
+            this.backdropClass.toggleBackdrop();
+            this.notificationContainer.classList.add('show');
+        }, 200);
     }
 
     createCheckBox() {
@@ -158,7 +178,7 @@ export default class Notification {
     }
 
     bindButtonEvent() {
-        const { button, final, actions, checkbox } = this.settings;
+        const { button, final, actions, checkbox, backdrop } = this.settings;
         const buttons = Array.isArray(button) ? button : [];
         const callbacks = Array.isArray(actions) ? actions : [];
         const finalFn = typeof final === 'function' ? final : null;
@@ -199,12 +219,19 @@ export default class Notification {
                     // resetting the whole process
                     setTimeout(() => {
                         this.resetNotification();
+                        this.backdropClass.toggleBackdrop();
                         this.run();
                         checkInput = false;
                     }, 200);
                 }, { once: true });
             });
         }
+
+        // backdrop events
+        this.backdropClass.bindBackDropEvent(()=>{
+            this.resetNotification();
+            this.run();
+        });
     }
 
     checkAutoClose() {
@@ -217,6 +244,7 @@ export default class Notification {
         if (autoCloseEnabled) {
             setTimeout(() => {
                 this.resetNotification();
+                this.backdropClass.toggleBackdrop();
                 if (onCloseFn) onCloseFn();
                 this.showFinal(finalFn);
                 this.run();
@@ -242,6 +270,7 @@ export default class Notification {
             if (onCloseFn) onCloseFn();
             this.showFinal(finalFn);
             this.resetNotification();
+            this.backdropClass.toggleBackdrop();
             this.run();
         });
     }

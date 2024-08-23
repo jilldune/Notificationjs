@@ -41,6 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 checked: true,
                 onChange: (state) => console.log(state)
             },
+            backdrop: {
+                level: 9,
+                clickToClose: true
+            }
         });
     })
     
