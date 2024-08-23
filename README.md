@@ -206,6 +206,11 @@ let options = {
         set: false,
         label: 'Default',
         checked: false
+    },
+    backdrop: {
+        set: false,
+        level: 1,
+        clickToClose: false
     }
 }
 ```
@@ -246,6 +251,58 @@ More about the checkbox object is shown in the table below:
 |label|no|String|The label/name of the checkbox. Default is 'Label'.|
 |checked|no|Boolean|Shows whether the checkbox is initially checked or not. Default is False|
 |onChange|no|Function|If this function is set, it is fired any time the state of the checkbox changes and the state is passed to it as an argument that can be received and used.|
+
+#### Backdrop
+A backdrop can be added to the notification or the prompt container. To do so, a backdrop property can be added to the object which is also an object 
+```Javascript
+let options = {
+    // ... other properties
+    backdrop: {
+        set: false,
+        level: 1,
+        clickToClose: false
+    }
+}
+```
+More about the checkbox object is shown in the table below:  
+|Property|Required|Type|Description|
+|:----------|:----------:|:----------:|:----------|
+|set|yes|Boolean|Tells the process to create the checkbox or not. Default is True|
+|level|no|Number|The the level shows how much background should be added, it ranges from 1 - 10. Default is transparent.|
+|clcikToClose|no|Boolean|Shows whether the backdrop can be clicked to close the whole function, it doesn't execute any user defined code passed. Default is False|  
+Note: This property and others can be passed to the constructor function and is set as default, but can be over written at runtime as the object is passed to the notification or prompt method.  
+```Javascript
+    let options = {
+        // ... other properties
+        backdrop: {
+            set: false,
+            level: 1,
+            clickToClose: false
+        }
+    }
+
+    // options passed to the constructor function
+    const {notification} = new Notification(options);
+    const {prompt} = new Prompt(options);
+
+    // passed to the method to be executed at runtime
+    notifiation({
+        // ... other properties
+        backdrop: {
+            set: true,
+            level: 1,
+            clickToClose: false
+        }
+    })
+    prompt({
+        // ... other properties
+        backdrop: {
+            set: false,
+            level: 1,
+            clickToClose: true
+        }
+    })
+```
 
 ### Exclusive properties for Notification
 ```Javascript
