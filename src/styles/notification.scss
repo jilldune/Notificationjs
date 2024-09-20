@@ -595,30 +595,32 @@ $bacdropZindex: 9999;
 /* ********************************************* TOAST ***************************************** */
 /* ********************************************************************************************* */
 /* ********************************************************************************************* */
-.toast-container-toastjs{
+.toast-container-toastjs {
     @include center;
     position: fixed;
     top: -10%;
     left: 0;
     right: 0;
-    z-index: 30;
+    z-index: 100;
         
     .toast{
         @include horizontal;
         max-width: 25rem;
+        color: $black;
         background-color: $white;
-        padding: .4rem .9rem;
+        padding: .4rem .5rem;
         border-bottom: .1rem solid;
-        position: absolute;
+        position: relative;
         top: 0;
         transition: top 1s ease-in-out;
         box-shadow: 0 0.18rem 0.3rem 0 #0000003a;
 
         &.active{ top: 7rem; }
-
-        position: relative;
         
-        &::before{ font-family: "remixicon"; }
+        &::before{
+            font-family: "remixicon";
+            margin-right: .5rem;
+        }
         
         &.success{
             border-bottom-color: $toastSuccess;
@@ -626,7 +628,6 @@ $bacdropZindex: 9999;
             &::before {
                 content: '\eb80';
                 color: $toastSuccess;
-                margin-right: 1rem;
             }
         }
         &.error{
@@ -635,7 +636,6 @@ $bacdropZindex: 9999;
             &::before {
                 content: '\eb96';
                 color: $toastErr;
-                margin-right: 1rem;
             }
         }
         &.info{
@@ -643,8 +643,7 @@ $bacdropZindex: 9999;
             
             &::before {
                 content: '\ee58';
-                color: $toastInfo;   
-                margin-right: 1rem;
+                color: $toastInfo;
             }
         }
         &.alert{
@@ -652,8 +651,7 @@ $bacdropZindex: 9999;
             
             &::before {
                 content: '\ea20';
-                color: $toastAlert;   
-                margin-right: 1rem;
+                color: $toastAlert;
             }
         }
         &.neutral{ border-color: $toastNeutral; }
