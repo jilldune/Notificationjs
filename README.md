@@ -321,6 +321,7 @@ let options = {
     // ... other properties 
     placeHolder: 'enter text', 
     type: 'text',
+    label: '',
     value: ''
 }
 ```
@@ -332,6 +333,7 @@ The table below shows the various properties that can be included in the paramet
 |type|no|String|Shows the type of element input type to used. If not given, a 'text' input type is used|
 |placeholder|no|String|Shows what is to be used as a placeholder for the input. If not given, a placeholder text is used|
 |value|no|String|Shows what is to be used as an initial for the input.|
+|label|no|String|Shows what is to be used as a label bound to the input type specified.|
 ### Position
 The table below shows the various position properties that can be used to controll the position of the notification or prompt container.
 ```Javascript
