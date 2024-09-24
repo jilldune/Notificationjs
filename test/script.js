@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
         prompt({
             header: 'Text',
             placeHolder: 'Please enter your username',
-            type: 'text',
+            label: 'Label here',
+            type: 'textarea',
             button: ['Okay','hello'],
             actions: [(obj)=>{console.log(obj);},()=>{}],
             checkbox: {
@@ -51,16 +52,16 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('toast').addEventListener('click', (e)=>{
         e.preventDefault();
         // Display the prompt
-        toast('a','Hello, sup... Alert');
-        toast('n','Hello, sup... Neutral');
-        toast('s','Hello, sup... Success');
-        toast('i','Hello, sup... Info');
-        toast('e','Hello, sup... Error');
+        toast('a','Alert');
+        toast('n','Neutral');
+        toast('s','Success');
+        toast('i','Info');
+        toast('e','Error');
     })
     document.getElementById('toastIm').addEventListener('click', (e)=>{
         e.preventDefault();
         // Display the prompt
-        toast('n','Hey, Hey, Hey, this is an immediate toast',true);
+        toast('n','Immediate toast',true);
     })
 });
 
