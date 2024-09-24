@@ -1,10 +1,11 @@
-import { BackDrop, Queue, merge } from "./helpers.js";
+import { BackDrop, Queue, generateV4UUID, merge } from "./helpers.js";
 
 export default class Prompt {
     defaults = {
         header: 'Prompt', 
         placeHolder: 'enter text', 
-        value: '', 
+        value: '',
+        label: null,
         type: 'text', 
         button: null, 
         actions: null, 
@@ -46,6 +47,8 @@ export default class Prompt {
         'center'
     ];
 
+    types = ['textarea','text','password','number','tel','email','url'];
+
     settings = {};
     promptContainer = null;
     queue = undefined;
@@ -86,11 +89,12 @@ export default class Prompt {
 
     display(options) {
         this.settings = this.isObject(options) ? merge(this.defaults, {backdrop: this.settings.backdrop}, options) : this.settings;
-        let { header, position, value, placeHolder, type } = this.settings;
+        let { header, position, value, placeHolder, type, label } = this.settings;
         header = header || this.defaults.header;
         position = position || this.defaults.position;
         value = value || this.defaults.value;
         type = type || this.defaults.type;
+        label = label || this.defaults.label;
         placeHolder = placeHolder || this.defaults.placeHolder;
 
         // backdrop
@@ -99,18 +103,26 @@ export default class Prompt {
 
         this.checkPosition(position);
         this.resetPrompt();
-        this.setContent(header, position, type, value, placeHolder);
+        this.setContent(header, position, type, value, placeHolder, label);
         this.closePrompt();
     }
 
-    setContent(header, position, type, value, placeHolder) {
+    setContent(header, position, type, value, placeHolder, label) {
+        let uid = generateV4UUID();        
         this.promptContainer.innerHTML = `
             <div class="prompt-header">
                 <p>${header}</p>
                 <span class="prompt-close"><i class="${this.closeIcon(position)}"></i></span>
             </div>
             <div class="prompt-body">
-                <input class="prompt-input" type="${type}" ${value? `value="${value}"`:""} placeholder="${placeHolder}" />
+                ${label? `<label class="prompt-label" for="${uid}">${typeof label === "string"? label:''}</label>`:''}
+                ${
+                    this.types.includes(type) && type === 'textarea'?
+                        `<textarea class="prompt-input" id="${uid}" placeholder="${placeHolder}" aria-placeholder="${placeHolder}">${value? `${value}`:""}</textarea>`:
+                        this.types.includes(type)?
+                            `<input class="prompt-input" id="${uid}" type="${type}" ${value? `value="${value}"`:""} placeholder="${placeHolder}" aria-placeholder="${placeHolder}" />`:
+                            `<input class="prompt-input" id="${uid}" type="text" ${value? `value="${value}"`:""} placeholder="${placeHolder}" aria-placeholder="${placeHolder}" />`
+                }
             </div>
             <div class="prompt-footer">
                 ${this.createCheckBox()}

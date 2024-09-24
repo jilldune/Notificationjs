@@ -262,6 +262,16 @@ $bacdropZindex: 9999;
         padding: .2em;
         overflow: hidden auto;
 
+        .prompt-label {
+            display: block;
+            width: fit-content;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.014rem;
+            color: #333232;
+        }
+
+        textarea.prompt-input,
         input.prompt-input {
             $pH: .6em;
             $pW: .4em;
@@ -272,9 +282,13 @@ $bacdropZindex: 9999;
             background-color: $bg;
             border-bottom: 1px solid $bg;
 
-            &:focus {
-                border-bottom: 1px solid #dfdfdf;
-            }
+            &:focus { border-bottom: 1px solid #dfdfdf; }
+            &::placeholder {font-style: italic;}
+        }
+
+        textarea.prompt-input {
+            resize: none;
+            height: 50px;
         }
     }
 

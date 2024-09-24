@@ -253,6 +253,17 @@
   padding: 0.2em;
   overflow: hidden auto;
 }
+.prompt .prompt-body .prompt-label {
+  display: block;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.014rem;
+  color: #333232;
+}
+.prompt .prompt-body textarea.prompt-input,
 .prompt .prompt-body input.prompt-input {
   width: calc(100% - 0.75em);
   padding: 0.6em 0.4em;
@@ -260,8 +271,29 @@
   background-color: #f3f3f3;
   border-bottom: 1px solid #f3f3f3;
 }
+.prompt .prompt-body textarea.prompt-input:focus,
 .prompt .prompt-body input.prompt-input:focus {
   border-bottom: 1px solid #dfdfdf;
+}
+.prompt .prompt-body textarea.prompt-input::-webkit-input-placeholder, .prompt .prompt-body input.prompt-input::-webkit-input-placeholder {
+  font-style: italic;
+}
+.prompt .prompt-body textarea.prompt-input::-moz-placeholder, .prompt .prompt-body input.prompt-input::-moz-placeholder {
+  font-style: italic;
+}
+.prompt .prompt-body textarea.prompt-input:-ms-input-placeholder, .prompt .prompt-body input.prompt-input:-ms-input-placeholder {
+  font-style: italic;
+}
+.prompt .prompt-body textarea.prompt-input::-ms-input-placeholder, .prompt .prompt-body input.prompt-input::-ms-input-placeholder {
+  font-style: italic;
+}
+.prompt .prompt-body textarea.prompt-input::placeholder,
+.prompt .prompt-body input.prompt-input::placeholder {
+  font-style: italic;
+}
+.prompt .prompt-body textarea.prompt-input {
+  resize: none;
+  height: 50px;
 }
 .prompt .prompt-footer {
   padding: 0.5em;
