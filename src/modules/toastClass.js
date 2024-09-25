@@ -32,6 +32,7 @@ export default class Toast {
     createParentContainer() {
         // Check if the container already exists
         const existingContainer = document.querySelector(`.${this.CONTAINER_CLASS}`);
+        this.#parentContainer = existingContainer;
         if (existingContainer) return;
 
         // Create a new container and insert it at the beginning of the body
