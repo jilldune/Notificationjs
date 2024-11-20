@@ -625,6 +625,8 @@ $bacdropZindex: 9999;
         padding: .4rem .5rem;
         border-bottom: .1rem solid;
         position: relative;
+        word-break: break-all;
+        word-wrap: break-word;
         top: 0;
         transition: top 1s ease-in-out;
         box-shadow: 0 0.18rem 0.3rem 0 #0000003a;

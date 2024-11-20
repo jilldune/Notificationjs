@@ -505,6 +505,8 @@
   padding: 0.4rem 0.5rem;
   border-bottom: 0.1rem solid;
   position: relative;
+  word-break: break-all;
+  word-wrap: break-word;
   top: 0;
   transition: top 1s ease-in-out;
   box-shadow: 0 0.18rem 0.3rem 0 rgba(0, 0, 0, 0.2274509804);

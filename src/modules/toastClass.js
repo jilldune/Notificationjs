@@ -10,6 +10,7 @@ export default class Toast {
       success: 'success',
       info: 'info',
       error: 'error',
+    //   alternate reference
       a: 'alert',
       n: 'neutral',
       s: 'success',
